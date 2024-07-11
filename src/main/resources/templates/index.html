@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <style>
+
+        body {
+          margin: 0; /* Remove default body margins */
+          font-family: sans-serif; /* Set a basic font family */
+        }
+
+        .background-overlay {
+          position: fixed; /* Fix the overlay to the viewport */
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%; /* Cover the entire viewport */
+          background-image: url('../images/logo.jpg'); /* Set background image */
+          background-size: cover; /* Cover the entire area */
+          background-position: center; /* Center the image */
+          background-repeat: no-repeat; /* Prevent image repetition */
+          opacity: 0.1; /* Set desired opacity (0-1 for transparency) */
+          z-index: -1; /* Place the overlay behind the content */
+        }
+
+        .container {
+          position: relative; /* Enable relative positioning */
+          margin: 0 auto; /* Center the container horizontally */
+          max-width: 80%; /* Set a maximum width for responsiveness */
+          padding: 20px; /* Add some padding around the content */
+        }
+
+                table, th, td {
+                  border: 1px solid black;
+                }
+
+        .myDiv {
+          border: 5px outset red;
+          background-color: beige;
+          text-align: center;
+          margin: 2% 20% 2% 20%;
+        }
+
+        <style>
+    table {
+        width: 100%; /* Make the table span the full width of its container */
+        border-collapse: collapse; /* Collapse borders to create a seamless appearance */
+        margin: 20px auto; /* Add some spacing around the table */
+    }
+
+    th, td {
+        padding: 10px; /* Add padding to cells for spacing */
+        border: 1px solid #ccc; /* Add a thin gray border to each cell */
+        text-align: left; /* Align text to the left */
+    }
+
+    th {
+        font-weight: bold; /* Make header text bold */
+    }
+
+    tbody tr:nth-child(odd) {
+
+    }
+    </style>
+
+    </style>
+    <title>Personen-Datenbank</title>
+</head>
+<body>
+<div class="background-overlay"></div>
+<div class="container"></div>
+
+<center>
+    <h1>Personen-Datenbank</h1>
+
+    <div class="myDiv">
+        <form action="/addPerson" method="post">
+            Vorname: <br><input name="firstName" required type="text"><br>
+            Nachname: <br><input name="lastName" required type="text"><br>
+            E-Mail: <br><input name="email" required type="email"><br>
+            Land: <br><input name="country" type="text"><br>
+            Geburtstag: <br><input name="birthday" type="date"><br>
+            Gehalt: <br><input name="salary" required type="number"><br>
+            Bonus: <br><input name="bonus" type="number"><br>
+            <input type="submit" value="Person hinzufügen">
+        </form>
+    </div>
+
+    <h2>Alle Einträge anzeigen</h2>
+    <form action="/alleAnzeigen" method="post">
+        <input type="submit" value="Alle Einträge anzeigen">
+    </form>
+
+    <br>
+
+    <hr>
+
+    <h2>Eintrag löschen</h2>
+
+    <form action="/deletePerson" method="post">
+        ID der zu löschenden Person eingeben: <br><input name="id" required type="number"><br>
+        <input type="submit" value="Person löschen">
+    </form>
+
+    <br><hr>
+
+    <section id="eintrag-bearbeiten">
+        <h2>Eintrag bearbeiten</h2>
+    </section><p>
+
+    <form action="/editPerson" method="post">
+
+        Neuer Wert eingeben: <br> <input name="filterText" required type="text"><br>
+
+        ID des Eintrags: <br> <input **id="id"** name="filterId" required type="text"><br>
+        <br>
+
+        <div class="radio-buttons">
+            <label for="updateFirstName">
+                <input type="radio" id="updateFirstName" name="updateOption" value="firstName" checked>
+                Vorname aktualisieren
+            </label>
+
+            <label for="updateLastName">
+                <input type="radio" id="updateLastName" name="updateOption" value="lastName">
+                Nachname aktualisieren
+            </label>
+
+            <label for="updateCountry">
+                <input type="radio" id="updateCountry" name="updateOption" value="country">
+                Land aktualisieren
+            </label>
+
+            <label for="updateEmail">
+                <input type="radio" id="updateEmail" name="updateOption" value="email" required typeof="email">
+                E-Mail aktualisieren
+            </label>
+
+            <label for="updateBirthday">
+                <input type="radio" id="updateBirthday" name="updateOption" value="birthday">
+                Geburtstag aktualisieren
+            </label>
+
+            <label for="updateSalary">
+                <input type="radio" id="updateSalary" name="updateOption" value="salary" required typeof="number">
+                Gehalt aktualisieren
+            </label>
+
+            <label for="updateBonus">
+                <input type="radio" id="updateBonus" name="updateOption" value="bonus" required typeof="number">
+                Bonus aktualisieren
+            </label>
+
+        </div>
+
+        <br>
+
+        <input type="submit" value="Person aktualisieren">
+    </form>
+
+    <br><hr>
+
+    <h2>Sortieren</h2><p>
+
+    <form action="/sortieren" method="post">
+
+    Nach Vorname, Nachname oder Land <br>
+    <select name="sortOption">
+        <option value="firstName">Vorname</option>
+        <option value="lastName">Nachname</option>
+        <option value="country">Land</option>
+        <option value="email">E-Mail</option>
+        <option value="birthday">Geburtstag</option>
+        <option value="salary">Gehalt</option>
+        <option value="bonus">Bonus</option>
+    </select>
+
+    <!-- Radio button ASC und DESC -->
+        <br>
+
+        <div class="radio-buttons">
+            <label for="asc">
+                <input type="radio" id="asc" name="sortieroption" value="asc" checked>
+                Sortieren Absteigend
+            </label>
+
+            <label for="desc">
+                <input type="radio" id="desc" name="sortieroption" value="desc">
+                Sortieren Aufsteigend
+            </label>
+        </div>
+
+        <br>
+
+        <input type="submit" value="Tabelle sortieren">
+    </form>
+
+    <br><hr>
+
+    <h2>Filtern</h2><p>
+
+    <form action="/filter" method="post">
+        Text oder Zahl eingeben nach dem gefiltert werden soll: <br><input name="filterText" required type="text"><br>
+        <input type="submit" value="Filtern nach">
+
+    <br>
+
+        <div>
+            <input type="radio" id="vorname" name="filterOption" value="vorname" checked />
+            <label for="vorname">Vorname</label>
+            <input type="radio" id="nachname" name="filterOption" value="nachname" checked />
+            <label for="nachname">Nachname</label>
+            <input type="radio" id="land" name="filterOption" value="land" checked />
+            <label for="land">Land</label>
+            <input type="radio" id="email" name="filterOption" value="email" checked />
+            <label for="vorname">E-Mail</label>
+            <input type="radio" id="birthday" name="filterOption" value="birthday" checked />
+            <label for="vorname">Geburtstag</label>
+            <input type="radio" id="salary" name="filterOption" value="salary" checked />
+            <label for="vorname">Gehalt</label>
+            <input type="radio" id="bonus" name="filterOption" value="bonus" checked />
+            <label for="vorname">Bonus</label>
+        </div>
+
+    </form>
+
+    <br>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Vorname</th>
+            <th>Nachname</th>
+            <th>E-Mail</th>
+            <th>Land</th>
+            <th>Geburtstag</th>
+            <th>Gehalt</th>
+            <th>Bonus</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="person : ${data}">
+            <td th:text="${person.id}">ID</td>
+            <td th:text="${person.first_name}">Vorname</td>
+            <td th:text="${person.last_name}">Nachname</td>
+            <td th:text="${person.email}">E-Mail</td>
+            <td th:text="${person.country}">Land</td>
+            <td th:text="${person.birthday}">Geburtstag</td>
+            <td th:text="${person.salary}">Gehalt</td>
+            <td th:text="${person.bonus}">Bonus</td>
+        </tr>
+        </tbody>
+    </table>
+    <style>
+        tr:hover {
+          background-color: #ff0000; /* Hellgrauer Hintergrund beim Hovern */
+        }
+    </style>
+
+    <p></p>
+</center>
+
+</body>
+</html>
