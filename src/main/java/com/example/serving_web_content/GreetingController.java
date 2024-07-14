@@ -1,6 +1,7 @@
 package com.example.serving_web_content;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -173,6 +174,8 @@ public class GreetingController {
         return "redirect:/";
     }
 
+
+
     @PostMapping("/sortieren")
     public String sortPeople(@RequestParam("sortOption") String sortOption,
                              @RequestParam("sortieroption") String sortOrder,
@@ -210,5 +213,38 @@ public class GreetingController {
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
         model.addAttribute("data", rows);
         return "index";
+    }
+
+    @GetMapping("/editPerson/{id}")
+    public ModelAndView editPerson(@PathVariable("id") int id) {
+        String sql = "SELECT * FROM person WHERE id = ?";
+
+        //zum testen
+        Map<String, Object> person = jdbcTemplate.queryForMap(sql, id);
+        for (Map.Entry<String, Object> entry : person.entrySet()) {
+            String key = entry.getKey();
+            Object value = entry.getValue();
+            String formattedValue;
+
+            if (value instanceof Integer) {
+                formattedValue = String.valueOf((Integer) value);
+            } else if (value instanceof String) {
+                formattedValue = (String) value;
+            } else {
+                formattedValue = value.toString(); // Default formatting for other types
+            }
+
+            System.out.println(key + " : " + formattedValue);
+        }
+
+
+        // Check if person is null
+        if (person == null) {
+            return new ModelAndView("error");  // Handle no person found (optional)
+        }
+
+        ModelAndView modelAndView = new ModelAndView("editPerson");
+        modelAndView.addObject("person", person);
+        return modelAndView;
     }
 }

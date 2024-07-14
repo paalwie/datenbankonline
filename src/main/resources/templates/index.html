@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <style>
 
@@ -101,52 +101,54 @@
         <input type="submit" value="Person löschen">
     </form>
 
-    <br><hr>
+    <br>
+    <hr>
 
     <section id="eintrag-bearbeiten">
         <h2>Eintrag bearbeiten</h2>
-    </section><p>
+    </section>
+    <p>
 
     <form action="/editPerson" method="post">
 
         Neuer Wert eingeben: <br> <input name="filterText" required type="text"><br>
 
-        ID des Eintrags: <br> <input **id="id"** name="filterId" required type="text"><br>
+        ID des Eintrags: <br> <input ** **id="id" name="filterId" required type="text"><br>
         <br>
 
         <div class="radio-buttons">
             <label for="updateFirstName">
-                <input type="radio" id="updateFirstName" name="updateOption" value="firstName" checked>
+                <input checked id="updateFirstName" name="updateOption" type="radio" value="firstName">
                 Vorname aktualisieren
             </label>
 
             <label for="updateLastName">
-                <input type="radio" id="updateLastName" name="updateOption" value="lastName">
+                <input id="updateLastName" name="updateOption" type="radio" value="lastName">
                 Nachname aktualisieren
             </label>
 
             <label for="updateCountry">
-                <input type="radio" id="updateCountry" name="updateOption" value="country">
+                <input id="updateCountry" name="updateOption" type="radio" value="country">
                 Land aktualisieren
             </label>
 
             <label for="updateEmail">
-                <input type="radio" id="updateEmail" name="updateOption" value="email" required typeof="email">
+                <input id="updateEmail" name="updateOption" required type="radio" typeof="email" value="email">
                 E-Mail aktualisieren
             </label>
 
             <label for="updateBirthday">
-                <input type="radio" id="updateBirthday" name="updateOption" value="birthday">
+                <input id="updateBirthday" name="updateOption" type="radio" value="birthday">
                 Geburtstag aktualisieren
             </label>
 
             <label for="updateSalary">
-                <input type="radio" id="updateSalary" name="updateOption" value="salary" required typeof="number">
+                <input id="updateSalary" name="updateOption" required type="radio" typeof="number" value="salary">
                 Gehalt aktualisieren
             </label>
 
             <label for="updateBonus">
-                <input type="radio" id="updateBonus" name="updateOption" value="bonus" required typeof="number">
+                <input id="updateBonus" name="updateOption" required type="radio" typeof="number" value="bonus">
                 Bonus aktualisieren
             </label>
 
@@ -157,34 +159,36 @@
         <input type="submit" value="Person aktualisieren">
     </form>
 
-    <br><hr>
+    <br>
+    <hr>
 
-    <h2>Sortieren</h2><p>
+    <h2>Sortieren</h2>
+    <p>
 
     <form action="/sortieren" method="post">
 
-    Nach Vorname, Nachname oder Land <br>
-    <select name="sortOption">
-        <option value="firstName">Vorname</option>
-        <option value="lastName">Nachname</option>
-        <option value="country">Land</option>
-        <option value="email">E-Mail</option>
-        <option value="birthday">Geburtstag</option>
-        <option value="salary">Gehalt</option>
-        <option value="bonus">Bonus</option>
-    </select>
+        Nach Vorname, Nachname oder Land <br>
+        <select name="sortOption">
+            <option value="firstName">Vorname</option>
+            <option value="lastName">Nachname</option>
+            <option value="country">Land</option>
+            <option value="email">E-Mail</option>
+            <option value="birthday">Geburtstag</option>
+            <option value="salary">Gehalt</option>
+            <option value="bonus">Bonus</option>
+        </select>
 
-    <!-- Radio button ASC und DESC -->
+        <!-- Radio button ASC und DESC -->
         <br>
 
         <div class="radio-buttons">
             <label for="asc">
-                <input type="radio" id="asc" name="sortieroption" value="asc" checked>
+                <input checked id="asc" name="sortieroption" type="radio" value="asc">
                 Sortieren Absteigend
             </label>
 
             <label for="desc">
-                <input type="radio" id="desc" name="sortieroption" value="desc">
+                <input id="desc" name="sortieroption" type="radio" value="desc">
                 Sortieren Aufsteigend
             </label>
         </div>
@@ -194,30 +198,32 @@
         <input type="submit" value="Tabelle sortieren">
     </form>
 
-    <br><hr>
+    <br>
+    <hr>
 
-    <h2>Filtern</h2><p>
+    <h2>Filtern</h2>
+    <p>
 
     <form action="/filter" method="post">
         Text oder Zahl eingeben nach dem gefiltert werden soll: <br><input name="filterText" required type="text"><br>
         <input type="submit" value="Filtern nach">
 
-    <br>
+        <br>
 
         <div>
-            <input type="radio" id="vorname" name="filterOption" value="vorname" checked />
+            <input checked id="vorname" name="filterOption" type="radio" value="vorname"/>
             <label for="vorname">Vorname</label>
-            <input type="radio" id="nachname" name="filterOption" value="nachname" checked />
+            <input checked id="nachname" name="filterOption" type="radio" value="nachname"/>
             <label for="nachname">Nachname</label>
-            <input type="radio" id="land" name="filterOption" value="land" checked />
+            <input checked id="land" name="filterOption" type="radio" value="land"/>
             <label for="land">Land</label>
-            <input type="radio" id="email" name="filterOption" value="email" checked />
+            <input checked id="email" name="filterOption" type="radio" value="email"/>
             <label for="vorname">E-Mail</label>
-            <input type="radio" id="birthday" name="filterOption" value="birthday" checked />
+            <input checked id="birthday" name="filterOption" type="radio" value="birthday"/>
             <label for="vorname">Geburtstag</label>
-            <input type="radio" id="salary" name="filterOption" value="salary" checked />
+            <input checked id="salary" name="filterOption" type="radio" value="salary"/>
             <label for="vorname">Gehalt</label>
-            <input type="radio" id="bonus" name="filterOption" value="bonus" checked />
+            <input checked id="bonus" name="filterOption" type="radio" value="bonus"/>
             <label for="vorname">Bonus</label>
         </div>
 
@@ -236,18 +242,32 @@
             <th>Geburtstag</th>
             <th>Gehalt</th>
             <th>Bonus</th>
+            <th>Bearbeiten</th>
+            <th>Löschen</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="person : ${data}">
             <td th:text="${person.id}">ID</td>
-            <td th:text="${person.first_name}">Vorname</td>
-            <td th:text="${person.last_name}">Nachname</td>
-            <td th:text="${person.email}">E-Mail</td>
-            <td th:text="${person.country}">Land</td>
-            <td th:text="${person.birthday}">Geburtstag</td>
-            <td th:text="${person.salary}">Gehalt</td>
-            <td th:text="${person.bonus}">Bonus</td>
+            <td class="first_name" th:text="${person.first_name}">Vorname</td>
+            <td class="last_name" th:text="${person.last_name}">Nachname</td>
+            <td class="email" th:text="${person.email}">E-Mail</td>
+            <td class="country" th:text="${person.country}">Land</td>
+            <td class="birthday" th:text="${person.birthday}">Geburtstag</td>
+            <td class="salary" th:text="${person.salary}">Gehalt</td>
+            <td class="bonus" th:text="${person.bonus}">Bonus</td>
+            <td>
+                <form method="get" th:action="@{/editPerson/{id}(id=${person.id})}">
+                    <button class="edit-button" data-person-id="{{ person.id }}">Bearbeiten</button>
+                </form>
+            </td>
+            </td>
+            <td>
+                <form method="post" th:action="@{/deletePerson(id=${person.id})}">
+                    <button type="submit">Löschen</button>
+                </form>
+            </td>
+
         </tr>
         </tbody>
     </table>
@@ -257,8 +277,44 @@
         }
     </style>
 
+    <div id="editForm">
+        <h2>Person bearbeiten</h2>
+        <form>
+            <input type="hidden" id="personId" name="id">
+            <label for="firstName">Vorname:</label>
+            <input type="text" id="firstName" name="firstName" required>
+
+            <button type="submit">Person aktualisieren</button>
+        </form>
+    </div>
+
     <p></p>
 </center>
+<script>
+    const editButtons = document.querySelectorAll('.edit-button');
+    const editForm = document.getElementById('editForm');
 
+    editButtons.forEach(button => {
+      button.addEventListener('click', (event) => {
+        const personId = event.target.dataset.personId;
+        populateEditForm(personId);
+      });
+    });
+
+    function populateEditForm(personId) {
+      fetch(`/editPerson/${personId}`) // Make a GET request to retrieve person data
+        .then(response => response.json())
+        .then(data => {
+          // Access form elements by their ID
+          editForm.personId.value = data.id;
+          // Set the value for the selected update option radio button (optional)
+          // ... (logic to set radio button based on data)
+
+          // Make the edit form visible (optional, adjust CSS for visibility)
+          editForm.style.display = "block";
+        })
+        .catch(error => console.error(error));
+    }
+</script>
 </body>
 </html>

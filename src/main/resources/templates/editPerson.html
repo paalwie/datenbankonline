@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Person bearbeiten</title>
+</head>
+<body>
+<script>var id = '${#strings.escapeJavaScript(person['id'])}'; </script>
+<h2>Person bearbeiten - ID: <var>id</var></h2>
+<form id="editPersonForm" action="/editPerson" method="post">
+    <input type="hidden" name="id" value="id">
+
+    <div class="person-details">
+        <label for="firstName">Vorname:</label>
+        <input type="text" id="firstName" name="firstName" value="${person.first_name}" required>
+
+        <label for="lastName">Nachname:</label>
+        <input type="text" id="lastName" name="lastName" value="${person.lastName ? person.lastName : ''}" required>
+
+        <label for="email">E-Mail:</label>
+        <input type="email" id="email" name="email" value="${person.email ? person.email : ''}" required>
+
+        <label for="country">Land:</label>
+        <input type="text" id="country" name="country" value="${person.country ? person.country : ''}">
+
+        <label for="birthday">Geburtstag:</label>
+        <input type="date" id="birthday" name="birthday" value="${person.birthday ? person.birthday : ''}">
+
+        <label for="salary">Gehalt:</label>
+        <input type="number" id="salary" name="salary" value="${person.salary ? person.salary : ''}" required>
+
+        <label for="bonus">Bonus:</label>
+        <input type="number" id="bonus" name="bonus" value="${person.birthday ? person.bonus : ''}">
+    </div>
+
+    <div class="update-options">
+        <h2>Aktualisierungsoptionen</h2>
+
+        <div class="radio-buttons">
+            <label for="updateFirstName">
+                <input id="updateFirstName" name="updateOption" type="radio" value="firstName">
+                Vorname aktualisieren
+            </label>
+
+            <label for="updateLastName">
+                <input id="updateLastName" name="updateOption" type="radio" value="lastName">
+                Nachname aktualisieren
+            </label>
+
+            <label for="updateCountry">
+                <input id="updateCountry" name="updateOption" type="radio" value="country">
+                Land aktualisieren
+            </label>
+
+            <label for="updateEmail">
+                <input id="updateEmail" name="updateOption" type="radio" value="email">
+                E-Mail aktualisieren
+            </label>
+
+            <label for="updateBirthday">
+                <input id="updateBirthday" name="updateOption" type="radio" value="birthday">
+                Geburtstag aktualisieren
+            </label>
+
+            <label for="updateSalary">
+                <input id="updateSalary" name="updateOption" type="radio" value="salary">
+                Gehalt aktualisieren
+            </label>
+
+            <label for="updateBonus">
+                <input id="updateBonus" name="updateOption" type="radio" value="bonus">
+                Bonus aktualisieren
+            </label>
+        </div>
+    </div>
+
+    <br>
+    <input type="submit" value="Person aktualisieren">
+</form>
+<script>
+    const radioButtons = document.querySelectorAll('input[name="updateOption"]');
+    const editForm = document.getElementById('editPersonForm');
+
+    editForm.addEventListener('submit', (event) => {
+        let updateOptionSelected = false;
+        for (const radioButton of radioButtons) {
+            if (radioButton.checked) {
+                updateOptionSelected = true;
+                break;
+            }
+        }
+
+        if (!updateOptionSelected) {
+            event.preventDefault(); // Prevent form submission if no option selected
+            alert("Bitte wählen Sie eine Aktualisierungsoption aus.");
+        }
+    });
+</script>
+<script>
+    var firstName = '${#strings.escapeJavaScript(person['first_name'])}'; // Access specific properties
+    var lastName = '${#strings.escapeJavaScript(person['last_name'])}';
+    alert("Vorname: " + firstName + ", Nachname: " + lastName);
+</script>
+</body>
+</html>
