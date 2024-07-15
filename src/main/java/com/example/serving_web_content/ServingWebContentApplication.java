@@ -11,7 +11,7 @@ import java.sql.SQLException;
 @ComponentScan("com.example.serving_web_content")
 public class ServingWebContentApplication {
 
-	//Version 1.01
+	//Version 1.02
 
 	public static void main(String[] args) {
 		SpringApplication.run(ServingWebContentApplication.class, args);

@@ -72,6 +72,47 @@
 <center>
     <h1>Personen-Datenbank</h1>
 
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Vorname</th>
+            <th>Nachname</th>
+            <th>E-Mail</th>
+            <th>Land</th>
+            <th>Geburtstag</th>
+            <th>Gehalt</th>
+            <th>Bonus</th>
+            <th>Bearbeiten</th>
+            <th>Löschen</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="person : ${data}">
+            <td th:text="${person.id}">ID</td>
+            <td class="first_name" th:text="${person.first_name}">Vorname</td>
+            <td class="last_name" th:text="${person.last_name}">Nachname</td>
+            <td class="email" th:text="${person.email}">E-Mail</td>
+            <td class="country" th:text="${person.country}">Land</td>
+            <td class="birthday" th:text="${person.birthday}">Geburtstag</td>
+            <td class="salary" th:text="${person.salary}">Gehalt</td>
+            <td class="bonus" th:text="${person.bonus}">Bonus</td>
+            <td>
+                <form method="get" th:action="@{/editPerson/{id}(id=${person.id})}">
+                    <button class="edit-button" data-person-id="{{ person.id }}">Bearbeiten</button>
+                </form>
+            </td>
+            </td>
+            <td>
+                <form method="post" th:action="@{/deletePerson(id=${person.id})}">
+                    <button type="submit">Löschen</button>
+                </form>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+
     <div class="myDiv">
         <form action="/addPerson" method="post">
             Vorname: <br><input name="firstName" required type="text"><br>
@@ -231,62 +272,12 @@
 
     <br>
 
-    <table>
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Vorname</th>
-            <th>Nachname</th>
-            <th>E-Mail</th>
-            <th>Land</th>
-            <th>Geburtstag</th>
-            <th>Gehalt</th>
-            <th>Bonus</th>
-            <th>Bearbeiten</th>
-            <th>Löschen</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="person : ${data}">
-            <td th:text="${person.id}">ID</td>
-            <td class="first_name" th:text="${person.first_name}">Vorname</td>
-            <td class="last_name" th:text="${person.last_name}">Nachname</td>
-            <td class="email" th:text="${person.email}">E-Mail</td>
-            <td class="country" th:text="${person.country}">Land</td>
-            <td class="birthday" th:text="${person.birthday}">Geburtstag</td>
-            <td class="salary" th:text="${person.salary}">Gehalt</td>
-            <td class="bonus" th:text="${person.bonus}">Bonus</td>
-            <td>
-                <form method="get" th:action="@{/editPerson/{id}(id=${person.id})}">
-                    <button class="edit-button" data-person-id="{{ person.id }}">Bearbeiten</button>
-                </form>
-            </td>
-            </td>
-            <td>
-                <form method="post" th:action="@{/deletePerson(id=${person.id})}">
-                    <button type="submit">Löschen</button>
-                </form>
-            </td>
 
-        </tr>
-        </tbody>
-    </table>
     <style>
         tr:hover {
           background-color: #ff0000; /* Hellgrauer Hintergrund beim Hovern */
         }
     </style>
-
-    <div id="editForm">
-        <h2>Person bearbeiten</h2>
-        <form>
-            <input type="hidden" id="personId" name="id">
-            <label for="firstName">Vorname:</label>
-            <input type="text" id="firstName" name="firstName" required>
-
-            <button type="submit">Person aktualisieren</button>
-        </form>
-    </div>
 
     <p></p>
 </center>

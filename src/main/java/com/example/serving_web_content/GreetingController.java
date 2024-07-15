@@ -1,7 +1,6 @@
 package com.example.serving_web_content;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -247,4 +246,26 @@ public class GreetingController {
         modelAndView.addObject("person", person);
         return modelAndView;
     }
+
+    @PostMapping("/editPersonAll")
+    public String updatePersonAll(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName,
+                                  @RequestParam("email") String email, @RequestParam("country") String country,
+                                  @RequestParam("birthday") String birthday, @RequestParam("salary") int salary,
+                                  @RequestParam("bonus") int bonus, @RequestParam("id") int id) throws ParseException {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // Adjust format if needed
+        java.util.Date parsedDate = dateFormat.parse(birthday);
+        java.sql.Date sqlDate = new java.sql.Date(parsedDate.getTime());
+
+        // Create the SQL update query
+        String sqlUpdate = "UPDATE person SET first_name = ?, last_name = ?, email = ?, country = ?, birthday = ?, salary = ?, bonus = ? WHERE id = ?";
+
+        System.out.println("Update person SET first_name = "  + firstName + ", last_name = " + lastName + ", email = " + email + ", country = " + country + ", birthday = " + sqlDate + ", salary = " + salary + ", bonus = " + bonus + " WHERE id = " + id);
+
+        jdbcTemplate.update(sqlUpdate, firstName, lastName, email, country, sqlDate, salary, bonus, id);
+        // Redirect to a success page or display a success message
+        return "redirect:/";
+    }
+
+
 }
