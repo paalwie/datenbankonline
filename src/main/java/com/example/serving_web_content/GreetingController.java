@@ -267,5 +267,11 @@ public class GreetingController {
         return "redirect:/";
     }
 
+    @GetMapping("/hallo")
+    public ModelAndView hello(Model model) {
+        ModelAndView modelAndView = new ModelAndView("hallo");
+        return modelAndView;
+    }
+
 
 }
